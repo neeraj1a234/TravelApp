@@ -1,5 +1,6 @@
 import axios from "axios";
 const token = sessionStorage.getItem("loginToken")
+console.log(token);
 
 const BASE_URL = "http://localhost:5000";
 

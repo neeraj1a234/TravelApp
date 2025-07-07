@@ -7,11 +7,14 @@ import NavBar from './Components/NavBar';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import MainPage from './Pages/MainPage';
 import MainComponent from './Components/MainComponent';
+import AdminProvider from './Context/AdminProvider';
+import AuthUserProvider from './Context/AuthUserProvider';
+import Destinations from './Pages/Destinations';
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
+    <AuthUserProvider>
+    <AdminProvider>
     <BrowserRouter>
       <Routes>
         <Route path='/' element={<MainComponent/>}>
@@ -19,9 +22,12 @@ function App() {
             <Route path="/home/login" element={<Login />} />
             <Route path="/home/signup" element={<Signup />} />
             <Route path="/home/admin/add" element={<AddDestinations />} />
+            <Route path="/home/destinations" element={<Destinations/>}/>
         </Route>
       </Routes>
     </BrowserRouter>
+    </AdminProvider>
+    </AuthUserProvider>
   );
 }
 

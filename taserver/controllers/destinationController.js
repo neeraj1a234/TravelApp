@@ -36,14 +36,26 @@ const bookDestination = async (req,res) => {
         res.status(500).send('Failed to Book Destination');
     }
 }
-// Update Destination
-const updateDestination = async (req,res) => {
+// remove Destination
+const { ObjectId } = require("mongodb");
+const removeDestination = async (req,res) => {
     const db = getDb();
-    const { id } = req.params;
-    const updateData = req.body;
-
-    const result = await db.collection("destinations").updateOne({ _id: new ObjectId(id) }, { $set: updateData });
-
-    res.status(200).json({ message: "Updated", result })
+    const removeId = req.params.id;
+    console.log("Deleting ID:", removeData);
+    const result = await db.collection('hotels').deleteOne({ _id: new ObjectId(removeId)});
+    res.status(200).json({ message: "Deleted", result })
 }
-module.exports = {allDestinations,addDestination,bookDestination}
+
+// update Destination
+const updateDestination = async (req, res) => {
+    const db = getDb();
+    const updateId = req.params.id;
+     const { name, description, location, priceRange, images } = req.body;
+    console.log("updating ID:", updateId);
+      const result = await db.collection("hotels").updateOne(
+      { _id: new ObjectId(updateId) },
+      { $set: { name, description, location, priceRange, images } }
+    );
+    res.status(200).json({ message: "Destination updated successfully" });
+}
+module.exports = {allDestinations,addDestination,bookDestination,removeDestination,updateDestination}

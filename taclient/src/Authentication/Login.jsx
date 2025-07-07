@@ -1,7 +1,9 @@
-import { useState } from "react"
+import { useContext, useState } from "react"
 import { loginPost } from "../Services/loginPost";
 import '../Styles/Login.css'
 import { Link, useNavigate } from "react-router-dom";
+import { AdminContext } from "../Context/AdminProvider";
+import { UserContext } from "../Context/AuthUserProvider";
 
 export default function Login () {
     const [loginData,setLoginData] = useState({
@@ -15,15 +17,22 @@ export default function Login () {
         console.log(loginData)
     }
     const navigate = useNavigate();
-
+    const {getAdmin} = useContext(AdminContext);
+    const {logIn} = useContext(UserContext)
+ 
     const userLogin = async() => {
         const login = await loginPost(loginData);
         if (login) {
-            alert(login.Admin)
+            alert(login.message)
+            logIn();
             sessionStorage.setItem("loginToken",login.token);
-            /////////
-            sessionStorage.setItem("isAdmin",login.Admin);
-            /////////
+ 
+                if(login.Admin){
+                console.log(login.Admin);
+                sessionStorage.setItem("isAdmin",login.Admin);
+                }
+
+            getAdmin()  
             navigate('/')
         }
         else if (login && login.error) {

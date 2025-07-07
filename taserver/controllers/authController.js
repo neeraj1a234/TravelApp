@@ -26,8 +26,18 @@ const payload = {
 }
 console.log("payload",payload)
 const token = tokenGenerator(payload)
+console.log("Token",token);
 ////////////////
-    return res.status(200).json({ message: "Login successful", token , Admin : user.isAdmin});
+//
+const response = {
+      message: "Login successful",
+      token,
+};
+if (user.isAdmin === true) {
+      response.Admin = true;
+}
+//
+    return res.status(200).json(response);
   } catch (error) {
     console.error("Login error:", error); 
     return res.status(500).json({ message: "Internal server error" });
