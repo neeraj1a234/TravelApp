@@ -1,0 +1,32 @@
+.signup-container {
+ max-width: 400px;
+  margin: 100px auto;
+  padding: 20px;              /* ✅ Add padding */
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  text-align: center;
+  font-family: Arial, sans-serif;
+  box-sizing: border-box; 
+}
+
+.signup-title {
+  margin-bottom: 20px;
+}
+
+.signup-input {
+   display: block;
+  width: 100%;
+  box-sizing: border-box;     /* ✅ Prevent overflow */
+  margin-bottom: 10px;
+  padding: 8px;
+  font-size: 14px;
+}
+
+.signup-button {
+  padding: 10px;
+  width: 100%;
+  background-color: #28a745;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
